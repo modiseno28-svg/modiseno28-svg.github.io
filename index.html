@@ -250,11 +250,6 @@
             align-items: center;
             justify-content: center;
             z-index: 100;
-            transition: opacity 0.5s ease-in-out;
-        }
-        #welcome-modal.hidden {
-            opacity: 0;
-            pointer-events: none;
         }
         .welcome-box {
             background-color: white;
@@ -457,3 +452,247 @@
                     <h3 class="text-2xl font-bold mb-2">Servicios a Domicilio</h3>
                     <p class="text-gray-700 mb-4">Disfruta de la calidad de Modiseño sin salir de casa. Consulta disponibilidad y precios.</p>
                     <a href="https://wa.me/50258556789?text=Hola,%20me%20gustaría%20consultar%20sobre%20sus%20servicios%20a%20domicilio." class="btn mt-auto inline-block">Consultar Ahora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Gallery -->
+    <section id="gallery" class="py-16 md:py-24">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12">Nuestra Galería</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://placehold.co/600x600/FEE7F2/ffffff?text=Coloracion+1" alt="Coloración 1" class="w-full h-full object-cover">
+                    <div class="gallery-overlay">
+                        <p class="text-white text-lg font-bold">Balayage en tono caramelo</p>
+                    </div>
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://placehold.co/600x600/E6E6FA/ffffff?text=Peinado+2" alt="Peinado 2" class="w-full h-full object-cover">
+                    <div class="gallery-overlay">
+                        <p class="text-white text-lg font-bold">Peinado de boda elegante</p>
+                    </div>
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://placehold.co/600x600/D4AF37/ffffff?text=Manicura+3" alt="Manicura 3" class="w-full h-full object-cover">
+                    <div class="gallery-overlay">
+                        <p class="text-white text-lg font-bold">Manicura francesa moderna</p>
+                    </div>
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="https://placehold.co/600x600/9993C3/ffffff?text=Corte+4" alt="Corte 4" class="w-full h-full object-cover">
+                    <div class="gallery-overlay">
+                        <p class="text-white text-lg font-bold">Corte bob con textura</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-16 md:py-24">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12">Lo que dicen nuestros clientes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card card p-8">
+                    <p class="italic text-gray-700 mb-4">"El equipo de estilistas de Modiseño es increíblemente talentoso. ¡Mi nuevo look superó todas mis expectativas!"</p>
+                    <div class="flex items-center justify-center">
+                        <img src="https://placehold.co/50x50/FEE7F2/ffffff?text=C1" alt="Cliente 1" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <p class="font-semibold text-gray-800">- Sofía G.</p>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card card p-8">
+                    <p class="italic text-gray-700 mb-4">"Mi nuevo corte de cabello superó todas mis expectativas. El estilista escuchó exactamente lo que quería y el resultado fue perfecto. ¡Totalmente recomendado!"</p>
+                    <div class="flex items-center justify-center">
+                        <img src="https://placehold.co/50x50/D4AF37/ffffff?text=C2" alt="Cliente 2" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <p class="font-semibold text-gray-800">- Juan P.</p>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card card p-8">
+                    <p class="italic text-gray-700 mb-4">"Estoy encantada con el resultado de mi diseño de uñas. El trabajo es impecable y se nota la calidad en cada detalle. ¡Gracias, Modiseño!"</p>
+                    <div class="flex items-center justify-center">
+                        <img src="https://placehold.co/50x50/9993C3/ffffff?text=C3" alt="Cliente 3" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <p class="font-semibold text-gray-800">- Elena S.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact -->
+    <section id="contact" class="py-16 md:py-24">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12">Contáctanos</h2>
+            <div class="max-w-xl mx-auto">
+                <p class="text-lg mb-6">Estamos aquí para ayudarte. No dudes en contactarnos para cualquier consulta, ya sea para una cita en el salón o un servicio a domicilio.</p>
+                <p class="text-xl font-bold mb-4" style="color: var(--dark-lavender);">Teléfono: +502 58556789</p>
+                <p class="text-xl font-bold mb-8" style="color: var(--dark-lavender);">Email: info@modiseno.com</p>
+                <a href="https://wa.me/50258556789?text=Hola,%20me%20gustaría%20agendar%20una%20cita." class="btn text-xl inline-block">Chatea con nosotros en WhatsApp</a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="text-white py-12">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+            <div class="mb-8 md:mb-0">
+                <h3 class="text-2xl font-bold mb-2">Modiseño</h3>
+                <p class="text-sm">Descubre tu mejor versión.</p>
+            </div>
+            <div class="mb-8 md:mb-0">
+                <h4 class="font-semibold mb-2">Horarios de Atención</h4>
+                <p>Lunes a Sábado: 9:00 AM - 7:00 PM</p>
+                <p>Domingo: Cerrado</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-2">Síguenos</h4>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <a href="https://www.facebook.com/profile.php?id=100063892306234" target="_blank" rel="noopener noreferrer" class="social-icon text-2xl"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon text-2xl"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon text-2xl"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-xs mt-8 text-gray-400">
+            &copy; 2025 Modiseño. Todos los derechos reservados.
+        </div>
+    </footer>
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/50258556789?text=Hola,%20me%20gustaría%20agendar%20una%20cita." class="whatsapp-float">
+        <div class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </a>
+    <script>
+        const welcomeModal = document.getElementById('welcome-modal');
+        const nameInput = document.getElementById('name-input');
+        const enterBtn = document.getElementById('enter-btn');
+        const errorMessage = document.getElementById('error-message');
+        const headerTitle = document.querySelector('.header-title');
+        function personalizePage(name) {
+            headerTitle.textContent = `¡Hola, ${name}! Descubre tu mejor versión, donde sea que estés`;
+        }
+        enterBtn.addEventListener('click', () => {
+            const userName = nameInput.value.trim();
+            if (userName) {
+                const capitalizedName = userName.toLowerCase().split(' ').map(word => {
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                }).join(' ');
+                // La solución: usar style.display = 'none' para ocultar el modal completamente
+                welcomeModal.style.display = 'none';
+                personalizePage(capitalizedName);
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        });
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        const particles = [];
+        let mouse = { x: -100, y: -100 };
+        const colors = ['#FEE7F2', '#E6E6FA', '#D4AF37', '#9993C3', '#ffffff', '#F7E1E8'];
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            createParticles();
+        }
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                const side = Math.floor(Math.random() * 4);
+                this.radius = Math.random() * 2 + 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.alpha = 1;
+                switch(side) {
+                    case 0:
+                        this.x = Math.random() * canvas.width;
+                        this.y = -this.radius;
+                        this.velocity = { x: (Math.random() - 0.5) * 0.2, y: Math.random() * 0.5 + 0.1 };
+                        break;
+                    case 1:
+                        this.x = canvas.width + this.radius;
+                        this.y = Math.random() * canvas.height;
+                        this.velocity = { x: -(Math.random() * 0.5 + 0.1), y: (Math.random() - 0.5) * 0.2 };
+                        break;
+                    case 2:
+                        this.x = Math.random() * canvas.width;
+                        this.y = canvas.height + this.radius;
+                        this.velocity = { x: (Math.random() - 0.5) * 0.2, y: -(Math.random() * 0.5 + 0.1) };
+                        break;
+                    case 3:
+                        this.x = -this.radius;
+                        this.y = Math.random() * canvas.height;
+                        this.velocity = { x: Math.random() * 0.5 + 0.1, y: (Math.random() - 0.5) * 0.2 };
+                        break;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.shadowColor = this.color;
+                ctx.shadowBlur = this.radius * 2;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+            update() {
+                const distance = Math.sqrt(Math.pow(mouse.x - this.x, 2) + Math.pow(mouse.y - this.y, 2));
+                if (distance < 100) {
+                    const angle = Math.atan2(mouse.y - this.y, mouse.x - this.x);
+                    const force = 0.05;
+                    this.velocity.x -= Math.cos(angle) * force;
+                    this.velocity.y -= Math.sin(angle) * force;
+                }
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                if (this.alpha > 0.01) {
+                    this.alpha -= 0.005;
+                } else {
+                    this.reset();
+                }
+                this.draw();
+            }
+        }
+        function createParticles() {
+            particles.length = 0;
+            const numParticles = Math.floor((canvas.width * canvas.height) / 10000);
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+            });
+        }
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+        });
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        window.onload = function() {
+            resizeCanvas();
+            animate();
+        };
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuContainer = document.getElementById('mobile-menu-container');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuContainer.classList.add('open');
+        });
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenuContainer.classList.remove('open');
+        });
+        function closeMobileMenu() {
+            mobileMenuContainer.classList.remove('open');
+        }
+    </script>
+</body>
+</html>

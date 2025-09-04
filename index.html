@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* Definición de variables de color para un estilo coherente */
         :root {
             --pastel-pink: #FEE7F2;
             --lavender: #E6E6FA;
@@ -252,7 +253,7 @@
             50% { transform: scale(1.15); opacity: 0.7; }
         }
         .name-input, .date-input, .time-input {
-            border: 2px solid var(--dark-lavender);
+            border: 2px solid var(--soft-gold); /* Borde dorado amigable */
             border-radius: 9999px;
             padding: 0.75rem 1.5rem;
             font-size: 1rem;
@@ -263,8 +264,10 @@
             text-align: center;
             margin-bottom: 1.5rem;
         }
+        /* Cambio de color del borde al enfocar */
         .name-input:focus, .date-input:focus, .time-input:focus {
-            border-color: var(--soft-gold);
+            border-color: var(--soft-gold); 
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.6); /* Sombra para resaltar */
         }
         .error-message {
             color: #E53E3E;
@@ -390,13 +393,36 @@
     <div id="booking-modal" style="display: none;">
         <div class="booking-box">
             <h3 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--soft-gold);">Agendar Cita</h3>
-            <p id="booking-service-name" class="text-lg font-semibold mb-4 text-gray-700"></p>
+            <p id="booking-service-name" class="text-lg font-semibold mb-2 text-gray-700"></p>
+            
+            <!-- Texto que sugiere amigablemente la fecha y hora -->
+            <p id="booking-required-message" class="text-gray-500 text-sm mb-4 font-semibold">
+                Selecciona una fecha y hora para tu comodidad.
+            </p>
+
             <div class="flex flex-col md:flex-row gap-4 mb-4">
-                <input type="date" id="booking-date" class="date-input md:w-1/2" required>
-                <input type="time" id="booking-time" class="time-input md:w-1/2" required>
+                <input type="date" id="booking-date" class="date-input md:w-1/2">
+                <input type="time" id="booking-time" class="time-input md:w-1/2">
             </div>
+            
+            <!-- Service Location Selection -->
+            <div class="flex flex-col items-center mb-6">
+                <p class="text-lg font-semibold mb-2">¿Dónde te gustaría el servicio?</p>
+                <div class="flex space-x-4 justify-center">
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="service-location" value="en el salón" class="form-radio text-pink-600 h-5 w-5" checked>
+                        <span class="text-gray-700">En el salón</span>
+                    </label>
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="service-location" value="a domicilio" class="form-radio text-pink-600 h-5 w-5">
+                        <span class="text-gray-700">A domicilio</span>
+                    </label>
+                </div>
+            </div>
+
             <button id="send-whatsapp-btn" class="btn text-lg md:text-xl w-full">Enviar Mensaje por WhatsApp</button>
             <p class="text-xs text-gray-500 mt-2">La disponibilidad será confirmada por el personal de Modiseño.</p>
+            <p id="booking-error-message" class="text-red-500 text-sm mt-2" style="display:none;"></p>
         </div>
     </div>
 
@@ -691,7 +717,7 @@
             <div class="max-w-xl mx-auto">
                 <p class="text-lg mb-6">Estamos aquí para ayudarte. No dudes en contactarnos para cualquier consulta, ya sea para una cita en el salón o un servicio a domicilio.</p>
                 <p class="text-xl font-bold mb-4" style="color: var(--dark-lavender);">Teléfono: +502 42585739</p>
-                <p class="text-xl font-bold mb-8" style="color: var(--dark-lavender);">Email: info@modiseno.com</p>
+                <p class="text-xl font-bold mb-8" style="color: var(--dark-lavender);">Email: modiseno28@gmail.com</p>
                 <button class="btn text-xl inline-block" data-service="General">Chatea con nosotros en WhatsApp</button>
             </div>
         </div>
@@ -750,6 +776,7 @@
         const bookingTimeInput = document.getElementById('booking-time');
         const sendWhatsappBtn = document.getElementById('send-whatsapp-btn');
         const serviceButtons = document.querySelectorAll('[data-service]');
+        const bookingErrorMessage = document.getElementById('booking-error-message');
 
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
@@ -801,14 +828,22 @@
         sendWhatsappBtn.addEventListener('click', () => {
             const date = bookingDateInput.value;
             const time = bookingTimeInput.value;
-
-            if (!date || !time) {
-                // Use a custom message since we cannot use alert()
-                alert("Por favor, selecciona una fecha y hora para continuar.");
-                return;
+            
+            let message = `Hola, mi nombre es ${userName}. Me gustaría agendar una cita para el servicio de *${currentService}*. `;
+            
+            if (date && time) {
+                message += `La fecha que me gustaría es el día *${date}* a las *${time}*. `;
+            } else if (date) {
+                message += `La fecha que me gustaría es el día *${date}*. `;
+            } else if (time) {
+                message += `Me gustaría que fuera a las *${time}*. `;
+            } else {
+                message += `Me gustaría coordinar una fecha y hora por este medio. `;
             }
 
-            const message = `Hola, mi nombre es ${userName}. Me gustaría agendar una cita para el servicio de *${currentService}* para el día *${date}* a las *${time}*. Esto es una solicitud pendiente de confirmación. ¡Gracias!`;
+            const serviceLocation = document.querySelector('input[name="service-location"]:checked').value;
+            message += `El servicio sería en la modalidad *${serviceLocation}*. ¡Gracias!`;
+            
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/50242585739?text=${encodedMessage}`, '_blank');
             bookingModal.style.display = 'none'; // Hide modal after sending

@@ -14,6 +14,8 @@
             --soft-gold: #D4AF37;
             --dark-lavender: #9993C3;
             --text-color: #4B4B4B;
+            --patriotic-blue: #7CB9E8;
+            --patriotic-white: #FFFFFF;
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -124,12 +126,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo más oscuro para mayor legibilidad */
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 1rem;
             opacity: 0;
             transition: opacity 0.3s ease;
+            text-align: center;
         }
         .gallery-item:hover .gallery-overlay {
             opacity: 1;
@@ -143,28 +147,6 @@
         .social-icon:hover {
             color: var(--soft-gold);
             transform: translateY(-3px) scale(1.1);
-        }
-        .chat-container {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 50;
-        }
-        .chat-button {
-            background-color: #25D366;
-            color: white;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease;
-        }
-        .chat-button:hover {
-            transform: scale(1.1);
         }
         .whatsapp-float {
             position: fixed;
@@ -226,18 +208,9 @@
             font-size: 2rem;
             color: var(--dark-lavender);
         }
-        .large-text-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 10;
-            color: var(--dark-lavender);
-            font-size: 10vw;
-            font-family: 'Playfair Display', serif;
-            font-weight: bold;
-            opacity: 0.1;
-            white-space: nowrap;
+        .at-home-card {
+            background-color: #F7E1E8;
+            border: 2px solid var(--soft-gold);
         }
         #welcome-modal {
             position: fixed;
@@ -273,12 +246,12 @@
         .interactive-icons span:nth-child(1) { animation-delay: 0.2s; }
         .interactive-icons span:nth-child(2) { animation-delay: 0.4s; }
         .interactive-icons span:nth-child(3) { animation-delay: 0.6s; }
-        
+
         @keyframes pulse-and-shine {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.15); opacity: 0.7; }
         }
-        
+
         .name-input {
             border: 2px solid var(--dark-lavender);
             border-radius: 9999px;
@@ -301,9 +274,98 @@
             margin-bottom: 1.5rem;
             display: none;
         }
-        .at-home-card {
-            background-color: #F7E1E8;
+        .patriotic-section {
+            background-color: var(--patriotic-blue);
+            color: white;
+        }
+        .patriot-card {
+            background-color: var(--patriotic-white);
+            color: var(--text-color);
             border: 2px solid var(--soft-gold);
+        }
+        /* --- New CSS for the Full-screen Image Gallery --- */
+        #fullscreen-gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+        }
+
+        #fullscreen-gallery-modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #modal-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 1rem;
+        }
+        
+        .modal-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            z-index: 201;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .modal-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #modal-prev-btn {
+            left: 1rem;
+        }
+        
+        #modal-next-btn {
+            right: 1rem;
+        }
+        
+        #modal-close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 2rem;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            z-index: 201;
+        }
+
+        #modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -325,8 +387,20 @@
             <button id="enter-btn" class="btn text-lg md:text-xl">¡Empecemos!</button>
         </div>
     </div>
+
+    <!-- Full-screen Gallery Modal (New Section) -->
+    <div id="fullscreen-gallery-modal" class="">
+        <span id="modal-close-btn">&times;</span>
+        <div class="modal-content">
+            <img id="modal-image" src="" alt="Imagen de la galería en pantalla completa">
+        </div>
+        <button id="modal-prev-btn" class="modal-btn">&#10094;</button>
+        <button id="modal-next-btn" class="modal-btn">&#10095;</button>
+    </div>
+
     <!-- Canvas for the interactive particle background -->
     <canvas id="particleCanvas"></canvas>
+
     <!-- Interactive Header -->
     <header id="inicio" class="header-interactive">
         <!-- Navigation Menu -->
@@ -339,6 +413,7 @@
                     <a href="#about" class="nav-link text-lg text-gray-800">Sobre Nosotros</a>
                     <a href="#services" class="nav-link text-lg text-gray-800">Servicios</a>
                     <a href="#gallery" class="nav-link text-lg text-gray-800">Galería</a>
+                    <a href="#promocion-patria" class="nav-link text-lg text-gray-800">Promoción</a>
                     <a href="#testimonials" class="nav-link text-lg text-gray-800">Testimonios</a>
                     <a href="#contact" class="nav-link text-lg text-gray-800">Contacto</a>
                 </div>
@@ -350,6 +425,7 @@
                 </div>
             </div>
         </nav>
+
         <!-- Mobile Menu Container -->
         <div id="mobile-menu-container" class="mobile-menu-container">
             <button id="close-menu-btn" class="close-btn">
@@ -358,15 +434,18 @@
             <a href="#about" class="mobile-menu-link" onclick="closeMobileMenu()">Sobre Nosotros</a>
             <a href="#services" class="mobile-menu-link" onclick="closeMobileMenu()">Servicios</a>
             <a href="#gallery" class="mobile-menu-link" onclick="closeMobileMenu()">Galería</a>
+            <a href="#promocion-patria" class="mobile-menu-link" onclick="closeMobileMenu()">Promoción</a>
             <a href="#testimonials" class="mobile-menu-link" onclick="closeMobileMenu()">Testimonios</a>
             <a href="#contact" class="mobile-menu-link" onclick="closeMobileMenu()">Contacto</a>
         </div>
+
         <div class="header-content-box">
             <h1 class="text-5xl md:text-7xl font-bold header-title" style="color: var(--soft-gold);">Descubre tu mejor versión, donde sea que estés</h1>
             <p class="text-xl md:text-2xl mt-4 font-bold" style="color: var(--dark-lavender);">En Modiseño, la belleza y el bienestar se encuentran.</p>
         </div>
     </header>
-    <!-- About Us -->
+
+    <!-- About Us Section -->
     <section id="about" class="py-16 md:py-24">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-4">Sobre Nosotros</h2>
@@ -376,75 +455,106 @@
             <div class="flex flex-col md:flex-row justify-center items-center space-y-8 md:space-y-0 md:space-x-8">
                 <!-- Team Member 1 -->
                 <div class="w-full md:w-1/3 card p-6">
-                    <img src="https://placehold.co/200x200/9993C3/ffffff?text=Estilista+1" alt="Estilista 1" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                    <h3 class="text-2xl font-semibold mb-2" style="color: var(--dark-lavender);">Ana</h3>
+                    <img src="https://placehold.co/200x200/FEE7F2/ffffff?text=Estilista+1" alt="Estilista 1" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                    <h3 class="text-2xl font-semibold mb-2" style="color: var(--dark-lavender);">Fer</h3>
                     <p class="italic text-gray-600">"Creando belleza con pasión."</p>
                 </div>
                 <!-- Team Member 2 -->
                 <div class="w-full md:w-1/3 card p-6">
                     <img src="https://placehold.co/200x200/FEE7F2/ffffff?text=Estilista+2" alt="Estilista 2" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                    <h3 class="text-2xl font-semibold mb-2" style="color: var(--dark-lavender);">Luis</h3>
+                    <h3 class="text-2xl font-semibold mb-2" style="color: var(--dark-lavender);">Ana</h3>
                     <p class="italic text-gray-600">"Cada cliente es un lienzo."</p>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Services -->
+
+    <!-- Services Section -->
     <section id="services" class="py-16 md:py-24">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-12">Nuestros Servicios</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service Card 1 -->
+                <!-- Service Card 1: Cortes de Cabello -->
                 <div class="service-card card p-8">
                     <div class="flex items-center justify-center mb-4">
                         <i class="fas fa-cut text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Cortes de Cabello</h3>
                     <p class="text-gray-700 mb-4">Cortes de tendencia, clásicos y personalizados para hombres y mujeres.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde $25</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q25.00</p>
                     <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20corte%20de%20cabello." class="btn mt-4 inline-block">Reservar Ahora</a>
                 </div>
-                <!-- Service Card 2 -->
+                <!-- Service Card 2: Coloración y Mechas -->
                 <div class="service-card card p-8">
                     <div class="flex items-center justify-center mb-4">
                         <i class="fas fa-brush text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Coloración y Mechas</h3>
                     <p class="text-gray-700 mb-4">Balayage, mechas, tintes y retoques para iluminar tu estilo.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde $50</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q150.00</p>
                     <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20servicio%20de%20coloración." class="btn mt-4 inline-block">Reservar Ahora</a>
                 </div>
-                <!-- Service Card 3 -->
+                <!-- Service Card 3: Tratamientos Capilares -->
                 <div class="service-card card p-8">
                     <div class="flex items-center justify-center mb-4">
                         <i class="fas fa-magic text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Tratamientos Capilares</h3>
                     <p class="text-gray-700 mb-4">Hidratación profunda, queratina y tratamientos para la salud de tu cabello.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde $30</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q75.00</p>
                     <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20tratamiento%20capilar." class="btn mt-4 inline-block">Reservar Ahora</a>
                 </div>
-                <!-- Service Card 4 -->
+                <!-- Service Card 4: Maquillaje -->
                 <div class="service-card card p-8">
                     <div class="flex items-center justify-center mb-4">
-                        <i class="fas fa-female text-5xl" style="color: var(--dark-lavender);"></i>
+                        <i class="fas fa-palette text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2">Peinados y Maquillaje</h3>
-                    <p class="text-gray-700 mb-4">Para bodas, eventos y cualquier ocasión especial.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde $60</p>
-                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20servicio%20de%20maquillaje%20y%20peinado." class="btn mt-4 inline-block">Reservar Ahora</a>
+                    <h3 class="text-2xl font-bold mb-2">Maquillaje</h3>
+                    <p class="text-gray-700 mb-4">Maquillaje profesional para eventos y ocasiones especiales.</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q100.00</p>
+                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20servicio%20de%20maquillaje." class="btn mt-4 inline-block">Reservar Ahora</a>
                 </div>
-                <!-- Service Card 5 -->
+                <!-- Service Card 5: Diseño de Uñas -->
                 <div class="service-card card p-8">
                     <div class="flex items-center justify-center mb-4">
                         <i class="fas fa-hand-sparkles text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Diseño de Uñas</h3>
                     <p class="text-gray-700 mb-4">Estilos creativos, manicura semipermanente y diseños personalizados.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde $20</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q100.00</p>
                     <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20diseño%20de%20uñas." class="btn mt-4 inline-block">Reservar Ahora</a>
                 </div>
-                <!-- New At-Home Service Card -->
+                <!-- Service Card 6: Extensión de Pestañas -->
+                <div class="service-card card p-8">
+                    <div class="flex items-center justify-center mb-4">
+                        <i class="fas fa-eye text-5xl" style="color: var(--dark-lavender);"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Extensión de Pestañas</h3>
+                    <p class="text-gray-700 mb-4">Añade longitud y volumen a tus pestañas para una mirada más dramática y expresiva.</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q150.00</p>
+                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20servicio%20de%20extensión%20de%20pestañas." class="btn mt-4 inline-block">Reservar Ahora</a>
+                </div>
+                <!-- Service Card 7: Diseño y Perfilado de Cejas -->
+                <div class="service-card card p-8">
+                    <div class="flex items-center justify-center mb-4">
+                        <i class="fas fa-seedling text-5xl" style="color: var(--dark-lavender);"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Diseño y Perfilado de Cejas</h3>
+                    <p class="text-gray-700 mb-4">Un diseño personalizado para enmarcar tu mirada y realzar tu belleza natural.</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q100.00</p>
+                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20diseño%20de%20cejas." class="btn mt-4 inline-block">Reservar Ahora</a>
+                </div>
+                <!-- Service Card 8: Alisado Permanente -->
+                <div class="service-card card p-8">
+                    <div class="flex items-center justify-center mb-4">
+                        <i class="fas fa-spa text-5xl" style="color: var(--dark-lavender);"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Alisado Permanente</h3>
+                    <p class="text-gray-700 mb-4">Un alisado duradero que deja tu cabello suave, brillante y sin frizz.</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q250.00</p>
+                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20alisado%20permanente." class="btn mt-4 inline-block">Reservar Ahora</a>
+                </div>
+                <!-- At-Home Service Card -->
                 <div class="at-home-card card p-8 flex flex-col justify-between items-center text-center">
                     <div class="flex items-center justify-center mb-4">
                         <i class="fas fa-home text-5xl" style="color: var(--dark-lavender);"></i>
@@ -456,39 +566,76 @@
             </div>
         </div>
     </section>
-    <!-- Gallery -->
+
+    <!-- Gallery Section -->
     <section id="gallery" class="py-16 md:py-24">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-12">Nuestra Galería</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Gallery items with images from the 'images' folder -->
                 <div class="gallery-item cursor-pointer">
-                    <img src="https://placehold.co/600x600/FEE7F2/ffffff?text=Coloracion+1" alt="Coloración 1" class="w-full h-full object-cover">
+                    <img src="images/G1.jpg" onerror="this.src='https://placehold.co/400x600/D4AF37/ffffff?text=G1';" alt="Balayage en tono dorado cenizo" class="w-full h-full object-cover" data-index="0">
                     <div class="gallery-overlay">
-                        <p class="text-white text-lg font-bold">Balayage en tono caramelo</p>
+                        <p class="text-white text-lg font-bold">Balayage en tono dorado cenizo</p>
                     </div>
                 </div>
                 <div class="gallery-item cursor-pointer">
-                    <img src="https://placehold.co/600x600/E6E6FA/ffffff?text=Peinado+2" alt="Peinado 2" class="w-full h-full object-cover">
+                    <img src="images/G2.jpg" onerror="this.src='https://placehold.co/400x600/9993C3/ffffff?text=G2';" alt="Maquillaje Profesional" class="w-full h-full object-cover" data-index="1">
                     <div class="gallery-overlay">
-                        <p class="text-white text-lg font-bold">Peinado de boda elegante</p>
+                        <p class="text-white text-lg font-bold">Maquillaje Profesional</p>
                     </div>
                 </div>
                 <div class="gallery-item cursor-pointer">
-                    <img src="https://placehold.co/600x600/D4AF37/ffffff?text=Manicura+3" alt="Manicura 3" class="w-full h-full object-cover">
+                    <img src="images/G3.jpg" onerror="this.src='https://placehold.co/400x600/FEE7F2/ffffff?text=G3';" alt="Diseño de Uñas" class="w-full h-full object-cover" data-index="2">
                     <div class="gallery-overlay">
-                        <p class="text-white text-lg font-bold">Manicura francesa moderna</p>
+                        <p class="text-white text-lg font-bold">Diseño de Uñas</p>
                     </div>
                 </div>
                 <div class="gallery-item cursor-pointer">
-                    <img src="https://placehold.co/600x600/9993C3/ffffff?text=Corte+4" alt="Corte 4" class="w-full h-full object-cover">
+                    <img src="images/G4.jpg" onerror="this.src='https://placehold.co/400x600/E6E6FA/ffffff?text=G4';" alt="Extensión de Pestañas" class="w-full h-full object-cover" data-index="3">
                     <div class="gallery-overlay">
-                        <p class="text-white text-lg font-bold">Corte bob con textura</p>
+                        <p class="text-white text-lg font-bold">Extensión de Pestañas</p>
+                    </div>
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/G5.jpg" onerror="this.src='https://placehold.co/400x600/D4AF37/ffffff?text=G5';" alt="Corte Moderno" class="w-full h-full object-cover" data-index="4">
+                    <div class="gallery-overlay">
+                        <p class="text-white text-lg font-bold">Corte Moderno</p>
+                    </div>
+                </div>
+                <div class="gallery-item cursor-pointer">
+                    <img src="images/G6.jpg" onerror="this.src='https://placehold.co/400x600/9993C3/ffffff?text=G6';" alt="Tinte y Alisado" class="w-full h-full object-cover" data-index="5">
+                    <div class="gallery-overlay">
+                        <p class="text-white text-lg font-bold">Tinte y Alisado</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Testimonials -->
+
+    <!-- Promotion Section - Patriotic Month -->
+    <section id="promocion-patria" class="py-16 md:py-24 patriotic-section">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-white">¡Promoción Combo del Mes Patrio! 🇬🇹</h2>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-12 text-white">
+                Disfruta de la siguiente promoción especial de septiembre, válida hasta el 30 de septiembre.
+            </p>
+            <!-- Promotion Card -->
+            <div class="patriot-card card p-8 mx-auto max-w-lg">
+                <h3 class="text-3xl font-bold mb-4" style="color: var(--dark-lavender);">¡Combo Patrio! Coloración + Diseño de Uñas</h3>
+                <p class="text-xl mb-4 text-gray-700">
+                    Aprovecha este combo exclusivo que incluye una coloración profesional completa y un diseño de uñas creativo.
+                </p>
+                <p class="text-2xl font-bold mb-4" style="color: var(--soft-gold);">Precio desde Q250.00</p>
+                <p class="text-sm font-semibold mb-6 text-gray-500">
+                    *Válido del 1 al 30 de septiembre.
+                </p>
+                <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20el%20Combo%20Patrio%20de%20Coloración%20y%20Uñas." class="btn text-lg inline-block">¡Aprovecha Ahora!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
     <section id="testimonials" class="py-16 md:py-24">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-12">Lo que dicen nuestros clientes</h2>
@@ -497,7 +644,7 @@
                 <div class="testimonial-card card p-8">
                     <p class="italic text-gray-700 mb-4">"El equipo de estilistas de Modiseño es increíblemente talentoso. ¡Mi nuevo look superó todas mis expectativas!"</p>
                     <div class="flex items-center justify-center">
-                        <img src="https://placehold.co/50x50/FEE7F2/ffffff?text=C1" alt="Cliente 1" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <img src="images/C1.jpg" onerror="this.src='https://placehold.co/50x50/E6E6FA/ffffff?text=C1';" alt="Rostro de cliente satisfecho" class="w-12 h-12 rounded-full mr-4 object-cover">
                         <p class="font-semibold text-gray-800">- Sofía G.</p>
                     </div>
                 </div>
@@ -505,7 +652,7 @@
                 <div class="testimonial-card card p-8">
                     <p class="italic text-gray-700 mb-4">"Mi nuevo corte de cabello superó todas mis expectativas. El estilista escuchó exactamente lo que quería y el resultado fue perfecto. ¡Totalmente recomendado!"</p>
                     <div class="flex items-center justify-center">
-                        <img src="https://placehold.co/50x50/D4AF37/ffffff?text=C2" alt="Cliente 2" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <img src="images/C2.jpg" onerror="this.src='https://placehold.co/50x50/E6E6FA/ffffff?text=C2';" alt="Rostro de cliente satisfecho" class="w-12 h-12 rounded-full mr-4 object-cover">
                         <p class="font-semibold text-gray-800">- Juan P.</p>
                     </div>
                 </div>
@@ -513,14 +660,15 @@
                 <div class="testimonial-card card p-8">
                     <p class="italic text-gray-700 mb-4">"Estoy encantada con el resultado de mi diseño de uñas. El trabajo es impecable y se nota la calidad en cada detalle. ¡Gracias, Modiseño!"</p>
                     <div class="flex items-center justify-center">
-                        <img src="https://placehold.co/50x50/9993C3/ffffff?text=C3" alt="Cliente 3" class="w-12 h-12 rounded-full mr-4 object-cover">
+                        <img src="images/C3.jpg" onerror="this.src='https://placehold.co/50x50/E6E6FA/ffffff?text=C3';" alt="Rostro de cliente satisfecho" class="w-12 h-12 rounded-full mr-4 object-cover">
                         <p class="font-semibold text-gray-800">- Elena S.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Contact -->
+
+    <!-- Contact Section -->
     <section id="contact" class="py-16 md:py-24">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-5xl font-bold mb-12">Contáctanos</h2>
@@ -532,6 +680,7 @@
             </div>
         </div>
     </section>
+
     <!-- Footer -->
     <footer class="text-white py-12">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
@@ -557,112 +706,117 @@
             &copy; 2025 Modiseño. Todos los derechos reservados.
         </div>
     </footer>
+
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita." class="whatsapp-float">
+    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita." class="whatsapp-float" aria-label="Chatea con nosotros en WhatsApp">
         <div class="whatsapp-btn">
             <i class="fab fa-whatsapp"></i>
         </div>
     </a>
+
+    <!-- JavaScript for dynamic functionalities -->
     <script>
+        // Welcome Modal Logic
         const welcomeModal = document.getElementById('welcome-modal');
         const nameInput = document.getElementById('name-input');
         const enterBtn = document.getElementById('enter-btn');
         const errorMessage = document.getElementById('error-message');
         const headerTitle = document.querySelector('.header-title');
+
         function personalizePage(name) {
             headerTitle.textContent = `¡Hola, ${name}! Descubre tu mejor versión, donde sea que estés`;
         }
+
         enterBtn.addEventListener('click', () => {
             const userName = nameInput.value.trim();
             if (userName) {
                 const capitalizedName = userName.toLowerCase().split(' ').map(word => {
                     return word.charAt(0).toUpperCase() + word.slice(1);
                 }).join(' ');
-                // La solución: usar style.display = 'none' para ocultar el modal completamente
                 welcomeModal.style.display = 'none';
                 personalizePage(capitalizedName);
             } else {
                 errorMessage.style.display = 'block';
             }
         });
+
+        // Interactive Particle Background Logic
         const canvas = document.getElementById('particleCanvas');
         const ctx = canvas.getContext('2d');
         const particles = [];
         let mouse = { x: -100, y: -100 };
-        const colors = ['#FEE7F2', '#E6E6FA', '#D4AF37', '#9993C3', '#ffffff', '#F7E1E8'];
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            createParticles();
-        }
+        const colors = [
+            '#FEE7F2', // Pastel Pink
+            '#E6E6FA', // Lavender
+            '#D4AF37', // Soft Gold
+            '#9993C3' // Dark Lavender
+        ];
+
+        // Particle Class
         class Particle {
-            constructor() {
-                this.reset();
+            constructor(x, y, radius, color) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.velocity = {
+                    x: (Math.random() - 0.5) * 1.5,
+                    y: (Math.random() - 0.5) * 1.5
+                };
             }
-            reset() {
-                const side = Math.floor(Math.random() * 4);
-                this.radius = Math.random() * 2 + 1;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.alpha = 1;
-                switch(side) {
-                    case 0:
-                        this.x = Math.random() * canvas.width;
-                        this.y = -this.radius;
-                        this.velocity = { x: (Math.random() - 0.5) * 0.2, y: Math.random() * 0.5 + 0.1 };
-                        break;
-                    case 1:
-                        this.x = canvas.width + this.radius;
-                        this.y = Math.random() * canvas.height;
-                        this.velocity = { x: -(Math.random() * 0.5 + 0.1), y: (Math.random() - 0.5) * 0.2 };
-                        break;
-                    case 2:
-                        this.x = Math.random() * canvas.width;
-                        this.y = canvas.height + this.radius;
-                        this.velocity = { x: (Math.random() - 0.5) * 0.2, y: -(Math.random() * 0.5 + 0.1) };
-                        break;
-                    case 3:
-                        this.x = -this.radius;
-                        this.y = Math.random() * canvas.height;
-                        this.velocity = { x: Math.random() * 0.5 + 0.1, y: (Math.random() - 0.5) * 0.2 };
-                        break;
-                }
-            }
+
             draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.shadowColor = this.color;
-                ctx.shadowBlur = this.radius * 2;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
                 ctx.fillStyle = this.color;
                 ctx.fill();
-                ctx.restore();
             }
+
             update() {
-                const distance = Math.sqrt(Math.pow(mouse.x - this.x, 2) + Math.pow(mouse.y - this.y, 2));
-                if (distance < 100) {
-                    const angle = Math.atan2(mouse.y - this.y, mouse.x - this.x);
-                    const force = 0.05;
-                    this.velocity.x -= Math.cos(angle) * force;
-                    this.velocity.y -= Math.sin(angle) * force;
+                // Bounce off walls
+                if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
+                    this.velocity.x = -this.velocity.x;
                 }
+                if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
+                    this.velocity.y = -this.velocity.y;
+                }
+
+                // Interaction with mouse
+                const dx = mouse.x - this.x;
+                const dy = mouse.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const repelDistance = 100;
+                const repelForce = 0.5;
+
+                if (distance < repelDistance) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = repelForce * (repelDistance - distance) / repelDistance;
+                    this.velocity.x -= force * Math.cos(angle);
+                    this.velocity.y -= force * Math.sin(angle);
+                }
+
+                // Update position
                 this.x += this.velocity.x;
                 this.y += this.velocity.y;
-                if (this.alpha > 0.01) {
-                    this.alpha -= 0.005;
-                } else {
-                    this.reset();
-                }
+
                 this.draw();
             }
         }
-        function createParticles() {
+
+        // Initialize particles
+        function init() {
             particles.length = 0;
-            const numParticles = Math.floor((canvas.width * canvas.height) / 10000);
-            for (let i = 0; i < numParticles; i++) {
-                particles.push(new Particle());
+            const particleCount = Math.min(Math.floor((canvas.width * canvas.height) / 10000), 100);
+            for (let i = 0; i < particleCount; i++) {
+                const radius = Math.random() * 5 + 2;
+                const x = Math.random() * (canvas.width - radius * 2) + radius;
+                const y = Math.random() * (canvas.height - radius * 2) + radius;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particles.push(new Particle(x, y, radius, color));
             }
         }
+
+        // Animation loop
         function animate() {
             requestAnimationFrame(animate);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -670,29 +824,109 @@
                 particle.update();
             });
         }
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-        });
+
+        // Handle window resize
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        }
+
+        // Handle mouse movement
         window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
+            mouse.x = e.x;
+            mouse.y = e.y;
         });
+
+        // Mobile Menu Logic
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenuContainer = document.getElementById('mobile-menu-container');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuContainer.classList.add('open');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenuContainer.classList.remove('open');
+        });
+
+        // Close mobile menu when a link is clicked
+        function closeMobileMenu() {
+            mobileMenuContainer.classList.remove('open');
+        }
+
+        // --- Gallery Modal Logic (NEW) ---
+        const galleryModal = document.getElementById('fullscreen-gallery-modal');
+        const modalImage = document.getElementById('modal-image');
+        const modalPrevBtn = document.getElementById('modal-prev-btn');
+        const modalNextBtn = document.getElementById('modal-next-btn');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const galleryItems = document.querySelectorAll('#gallery-grid .gallery-item img');
+
+        // This array will hold the images for the full-screen gallery.
+        // The images are now referenced from the 'images' folder.
+        const fullscreenImages = [
+            'images/G1.jpg',
+            'images/G2.jpg',
+            'images/G3.jpg',
+            'images/G4.jpg',
+            'images/G5.jpg',
+            'images/G6.jpg'
+        ];
+        let currentImageIndex = 0;
+
+        // Open the modal with the clicked image
+        galleryItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const index = parseInt(e.target.dataset.index);
+                if (!isNaN(index) && index < fullscreenImages.length) {
+                    currentImageIndex = index;
+                    updateModalImage();
+                    galleryModal.classList.add('show');
+                } else {
+                    console.error("Índice de imagen no válido:", e.target.dataset.index);
+                }
+            });
+        });
+
+        // Update the image in the modal
+        function updateModalImage() {
+            modalImage.src = fullscreenImages[currentImageIndex];
+        }
+
+        // Navigate to the previous image
+        modalPrevBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + fullscreenImages.length) % fullscreenImages.length;
+            updateModalImage();
+        });
+
+        // Navigate to the next image
+        modalNextBtn.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % fullscreenImages.length;
+            updateModalImage();
+        });
+
+        // Close the modal
+        modalCloseBtn.addEventListener('click', () => {
+            galleryModal.classList.remove('show');
+        });
+
+        // Close the modal by clicking outside the image
+        galleryModal.addEventListener('click', (e) => {
+            if (e.target.id === 'fullscreen-gallery-modal') {
+                galleryModal.classList.remove('show');
+            }
+        });
+
+        // Initialize on window load
         window.onload = function() {
             resizeCanvas();
             animate();
         };
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const mobileMenuContainer = document.getElementById('mobile-menu-container');
-        const closeMenuBtn = document.getElementById('close-menu-btn');
-        mobileMenuToggle.addEventListener('click', () => {
-            mobileMenuContainer.classList.add('open');
-        });
-        closeMenuBtn.addEventListener('click', () => {
-            mobileMenuContainer.classList.remove('open');
-        });
-        function closeMobileMenu() {
-            mobileMenuContainer.classList.remove('open');
-        }
+
+        // Re-initialize particles and resize canvas on window resize
+        window.addEventListener('resize', resizeCanvas);
     </script>
 </body>
 </html>

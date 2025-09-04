@@ -718,7 +718,7 @@
                 <p class="text-lg mb-6">Estamos aquí para ayudarte. No dudes en contactarnos para cualquier consulta, ya sea para una cita en el salón o un servicio a domicilio.</p>
                 <p class="text-xl font-bold mb-4" style="color: var(--dark-lavender);">Teléfono: +502 42585739</p>
                 <p class="text-xl font-bold mb-8" style="color: var(--dark-lavender);">Email: modiseno28@gmail.com</p>
-                <button class="btn text-xl inline-block" data-service="General">Chatea con nosotros en WhatsApp</button>
+                <button class="btn text-xl inline-block" onclick="openGeneralWhatsapp()">Chatea con nosotros en WhatsApp</button>
             </div>
         </div>
     </section>
@@ -750,7 +750,7 @@
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <button class="whatsapp-float" aria-label="Chatea con nosotros en WhatsApp" onclick="openBookingModal('General')">
+    <button class="whatsapp-float" aria-label="Chatea con nosotros en WhatsApp" onclick="openGeneralWhatsapp()">
         <div class="whatsapp-btn">
             <i class="fab fa-whatsapp"></i>
         </div>
@@ -800,6 +800,13 @@
             currentService = serviceName;
             bookingServiceName.textContent = `Servicio: ${capitalizeFirstLetter(currentService)}`;
             bookingModal.style.display = 'flex';
+        }
+
+        // Open WhatsApp with a general message
+        function openGeneralWhatsapp() {
+            const message = "Hola, me gustaría más información sobre sus servicios.";
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/50242585739?text=${encodedMessage}`, '_blank');
         }
 
         // Handle the "Enter" button click in the welcome modal

@@ -212,7 +212,7 @@
             background-color: #F7E1E8;
             border: 2px solid var(--soft-gold);
         }
-        #welcome-modal {
+        #welcome-modal, #booking-modal {
             position: fixed;
             top: 0;
             left: 0;
@@ -224,7 +224,7 @@
             justify-content: center;
             z-index: 100;
         }
-        .welcome-box {
+        .welcome-box, .booking-box {
             background-color: white;
             padding: 2.5rem 2rem;
             border-radius: 1.5rem;
@@ -251,8 +251,7 @@
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.15); opacity: 0.7; }
         }
-
-        .name-input {
+        .name-input, .date-input, .time-input {
             border: 2px solid var(--dark-lavender);
             border-radius: 9999px;
             padding: 0.75rem 1.5rem;
@@ -264,7 +263,7 @@
             text-align: center;
             margin-bottom: 1.5rem;
         }
-        .name-input:focus {
+        .name-input:focus, .date-input:focus, .time-input:focus {
             border-color: var(--soft-gold);
         }
         .error-message {
@@ -283,7 +282,6 @@
             color: var(--text-color);
             border: 2px solid var(--soft-gold);
         }
-        /* --- New CSS for the Full-screen Image Gallery --- */
         #fullscreen-gallery-modal {
             position: fixed;
             top: 0;
@@ -291,7 +289,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.9);
-            display: none; /* Initially hidden */
+            display: none;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -370,7 +368,7 @@
     </style>
 </head>
 <body>
-    <!-- Welcome Modal with Customization -->
+    <!-- Welcome Modal -->
     <div id="welcome-modal">
         <div class="welcome-box">
             <div class="interactive-icons">
@@ -388,7 +386,21 @@
         </div>
     </div>
 
-    <!-- Full-screen Gallery Modal (New Section) -->
+    <!-- Booking Modal (NEW) -->
+    <div id="booking-modal" style="display: none;">
+        <div class="booking-box">
+            <h3 class="text-3xl md:text-4xl font-bold mb-4" style="color: var(--soft-gold);">Agendar Cita</h3>
+            <p id="booking-service-name" class="text-lg font-semibold mb-4 text-gray-700"></p>
+            <div class="flex flex-col md:flex-row gap-4 mb-4">
+                <input type="date" id="booking-date" class="date-input md:w-1/2" required>
+                <input type="time" id="booking-time" class="time-input md:w-1/2" required>
+            </div>
+            <button id="send-whatsapp-btn" class="btn text-lg md:text-xl w-full">Enviar Mensaje por WhatsApp</button>
+            <p class="text-xs text-gray-500 mt-2">La disponibilidad será confirmada por el personal de Modiseño.</p>
+        </div>
+    </div>
+
+    <!-- Full-screen Gallery Modal -->
     <div id="fullscreen-gallery-modal" class="">
         <span id="modal-close-btn">&times;</span>
         <div class="modal-content">
@@ -439,9 +451,13 @@
             <a href="#contact" class="mobile-menu-link" onclick="closeMobileMenu()">Contacto</a>
         </div>
 
-        <div class="header-content-box">
+        <div class="header-content-box flex flex-col items-center">
             <h1 class="text-5xl md:text-7xl font-bold header-title" style="color: var(--soft-gold);">Descubre tu mejor versión, donde sea que estés</h1>
             <p class="text-xl md:text-2xl mt-4 font-bold" style="color: var(--dark-lavender);">En Modiseño, la belleza y el bienestar se encuentran.</p>
+            <!-- Call-to-Action button -->
+            <button class="btn text-xl md:text-2xl mt-8 inline-block transform transition-transform duration-300 hover:scale-105" onclick="openBookingModal('General')">
+                ¡Agenda tu Cita Ahora!
+            </button>
         </div>
     </header>
 
@@ -482,7 +498,7 @@
                     <h3 class="text-2xl font-bold mb-2">Cortes de Cabello</h3>
                     <p class="text-gray-700 mb-4">Cortes de tendencia, clásicos y personalizados para hombres y mujeres.</p>
                     <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q25.00</p>
-                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20corte%20de%20cabello." class="btn mt-4 inline-block">Reservar Ahora</a>
+                    <button class="btn mt-4 inline-block" data-service="Corte de Cabello">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 2: Coloración y Mechas -->
                 <div class="service-card card p-8">
@@ -492,7 +508,7 @@
                     <h3 class="text-2xl font-bold mb-2">Coloración y Mechas</h3>
                     <p class="text-gray-700 mb-4">Balayage, mechas, tintes y retoques para iluminar tu estilo.</p>
                     <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q150.00</p>
-                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20servicio%20de%20coloración." class="btn mt-4 inline-block">Reservar Ahora</a>
+                    <button class="btn mt-4 inline-block" data-service="Coloración y Mechas">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 3: Tratamientos Capilares -->
                 <div class="service-card card p-8">
@@ -502,7 +518,7 @@
                     <h3 class="text-2xl font-bold mb-2">Tratamientos Capilares</h3>
                     <p class="text-gray-700 mb-4">Hidratación profunda, queratina y tratamientos para la salud de tu cabello.</p>
                     <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q75.00</p>
-                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20tratamiento%20capilar." class="btn mt-4 inline-block">Reservar Ahora</a>
+                    <button class="btn mt-4 inline-block" data-service="Tratamientos Capilares">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 4: Maquillaje -->
                 <div class="service-card card p-8">
@@ -512,7 +528,7 @@
                     <h3 class="text-2xl font-bold mb-2">Maquillaje</h3>
                     <p class="text-gray-700 mb-4">Maquillaje profesional para eventos y ocasiones especiales.</p>
                     <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q100.00</p>
-                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20servicio%20de%20maquillaje." class="btn mt-4 inline-block">Reservar Ahora</a>
+                    <button class="btn mt-4 inline-block" data-service="Maquillaje">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 5: Diseño de Uñas -->
                 <div class="service-card card p-8">
@@ -522,7 +538,7 @@
                     <h3 class="text-2xl font-bold mb-2">Diseño de Uñas</h3>
                     <p class="text-gray-700 mb-4">Estilos creativos, manicura semipermanente y diseños personalizados.</p>
                     <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q100.00</p>
-                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20diseño%20de%20uñas." class="btn mt-4 inline-block">Reservar Ahora</a>
+                    <button class="btn mt-4 inline-block" data-service="Diseño de Uñas">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 6: Extensión de Pestañas -->
                 <div class="service-card card p-8">
@@ -532,7 +548,7 @@
                     <h3 class="text-2xl font-bold mb-2">Extensión de Pestañas</h3>
                     <p class="text-gray-700 mb-4">Añade longitud y volumen a tus pestañas para una mirada más dramática y expresiva.</p>
                     <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q150.00</p>
-                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20servicio%20de%20extensión%20de%20pestañas." class="btn mt-4 inline-block">Reservar Ahora</a>
+                    <button class="btn mt-4 inline-block" data-service="Extensión de Pestañas">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 7: Diseño y Perfilado de Cejas -->
                 <div class="service-card card p-8">
@@ -542,7 +558,7 @@
                     <h3 class="text-2xl font-bold mb-2">Diseño y Perfilado de Cejas</h3>
                     <p class="text-gray-700 mb-4">Un diseño personalizado para enmarcar tu mirada y realzar tu belleza natural.</p>
                     <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q100.00</p>
-                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20diseño%20de%20cejas." class="btn mt-4 inline-block">Reservar Ahora</a>
+                    <button class="btn mt-4 inline-block" data-service="Diseño y Perfilado de Cejas">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 8: Alisado Permanente -->
                 <div class="service-card card p-8">
@@ -552,7 +568,7 @@
                     <h3 class="text-2xl font-bold mb-2">Alisado Permanente</h3>
                     <p class="text-gray-700 mb-4">Un alisado duradero que deja tu cabello suave, brillante y sin frizz.</p>
                     <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q250.00</p>
-                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20un%20alisado%20permanente." class="btn mt-4 inline-block">Reservar Ahora</a>
+                    <button class="btn mt-4 inline-block" data-service="Alisado Permanente">Reservar Ahora</button>
                 </div>
                 <!-- At-Home Service Card -->
                 <div class="at-home-card card p-8 flex flex-col justify-between items-center text-center">
@@ -561,7 +577,7 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Servicios a Domicilio</h3>
                     <p class="text-gray-700 mb-4">Disfruta de la calidad de Modiseño sin salir de casa. Consulta disponibilidad y precios.</p>
-                    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20consultar%20sobre%20sus%20servicios%20a%20domicilio." class="btn mt-auto inline-block">Consultar Ahora</a>
+                    <button class="btn mt-auto inline-block" data-service="Servicio a Domicilio">Consultar Ahora</button>
                 </div>
             </div>
         </div>
@@ -630,7 +646,7 @@
                 <p class="text-sm font-semibold mb-6 text-gray-500">
                     *Válido del 1 al 30 de septiembre.
                 </p>
-                <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita%20para%20el%20Combo%20Patrio%20de%20Coloración%20y%20Uñas." class="btn text-lg inline-block">¡Aprovecha Ahora!</a>
+                <button class="btn text-lg inline-block" data-service="Combo Patrio">¡Aprovecha Ahora!</button>
             </div>
         </div>
     </section>
@@ -676,7 +692,7 @@
                 <p class="text-lg mb-6">Estamos aquí para ayudarte. No dudes en contactarnos para cualquier consulta, ya sea para una cita en el salón o un servicio a domicilio.</p>
                 <p class="text-xl font-bold mb-4" style="color: var(--dark-lavender);">Teléfono: +502 42585739</p>
                 <p class="text-xl font-bold mb-8" style="color: var(--dark-lavender);">Email: info@modiseno.com</p>
-                <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita." class="btn text-xl inline-block">Chatea con nosotros en WhatsApp</a>
+                <button class="btn text-xl inline-block" data-service="General">Chatea con nosotros en WhatsApp</button>
             </div>
         </div>
     </section>
@@ -708,14 +724,18 @@
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/50242585739?text=Hola,%20me%20gustaría%20agendar%20una%20cita." class="whatsapp-float" aria-label="Chatea con nosotros en WhatsApp">
+    <button class="whatsapp-float" aria-label="Chatea con nosotros en WhatsApp" onclick="openBookingModal('General')">
         <div class="whatsapp-btn">
             <i class="fab fa-whatsapp"></i>
         </div>
-    </a>
+    </button>
 
     <!-- JavaScript for dynamic functionalities -->
     <script>
+        // Global variables to store user data
+        let userName = '';
+        let currentService = '';
+
         // Welcome Modal Logic
         const welcomeModal = document.getElementById('welcome-modal');
         const nameInput = document.getElementById('name-input');
@@ -723,20 +743,81 @@
         const errorMessage = document.getElementById('error-message');
         const headerTitle = document.querySelector('.header-title');
 
-        function personalizePage(name) {
-            headerTitle.textContent = `¡Hola, ${name}! Descubre tu mejor versión, donde sea que estés`;
+        // Booking Modal Logic
+        const bookingModal = document.getElementById('booking-modal');
+        const bookingServiceName = document.getElementById('booking-service-name');
+        const bookingDateInput = document.getElementById('booking-date');
+        const bookingTimeInput = document.getElementById('booking-time');
+        const sendWhatsappBtn = document.getElementById('send-whatsapp-btn');
+        const serviceButtons = document.querySelectorAll('[data-service]');
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
-        enterBtn.addEventListener('click', () => {
-            const userName = nameInput.value.trim();
-            if (userName) {
-                const capitalizedName = userName.toLowerCase().split(' ').map(word => {
-                    return word.charAt(0).toUpperCase() + word.slice(1);
-                }).join(' ');
+        // Open booking modal with a specific service
+        function openBookingModal(serviceName) {
+            if (!userName) {
+                // If user hasn't entered a name, show welcome modal
+                welcomeModal.style.display = 'flex';
+                // Attach temporary event listener to enter button for immediate booking flow
+                enterBtn.removeEventListener('click', handleEnterClick);
+                enterBtn.addEventListener('click', () => {
+                    handleEnterClick();
+                    if (userName) {
+                        openBookingModal(serviceName);
+                    }
+                });
+                return;
+            }
+            currentService = serviceName;
+            bookingServiceName.textContent = `Servicio: ${capitalizeFirstLetter(currentService)}`;
+            bookingModal.style.display = 'flex';
+        }
+
+        // Handle the "Enter" button click in the welcome modal
+        function handleEnterClick() {
+            const inputName = nameInput.value.trim();
+            if (inputName) {
+                userName = inputName.toLowerCase().split(' ').map(capitalizeFirstLetter).join(' ');
                 welcomeModal.style.display = 'none';
-                personalizePage(capitalizedName);
+                headerTitle.textContent = `¡Hola, ${userName}! Descubre tu mejor versión, donde sea que estés`;
+                errorMessage.style.display = 'none';
             } else {
                 errorMessage.style.display = 'block';
+            }
+        }
+        enterBtn.addEventListener('click', handleEnterClick);
+
+        // Add event listeners to all service buttons
+        serviceButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const service = button.dataset.service;
+                openBookingModal(service);
+            });
+        });
+
+        // Handle the WhatsApp send button
+        sendWhatsappBtn.addEventListener('click', () => {
+            const date = bookingDateInput.value;
+            const time = bookingTimeInput.value;
+
+            if (!date || !time) {
+                // Use a custom message since we cannot use alert()
+                alert("Por favor, selecciona una fecha y hora para continuar.");
+                return;
+            }
+
+            const message = `Hola, mi nombre es ${userName}. Me gustaría agendar una cita para el servicio de *${currentService}* para el día *${date}* a las *${time}*. Esto es una solicitud pendiente de confirmación. ¡Gracias!`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/50242585739?text=${encodedMessage}`, '_blank');
+            bookingModal.style.display = 'none'; // Hide modal after sending
+        });
+
+        // Close modal when clicking outside
+        bookingModal.addEventListener('click', (e) => {
+            if (e.target.id === 'booking-modal') {
+                bookingModal.style.display = 'none';
             }
         });
 
@@ -746,13 +827,12 @@
         const particles = [];
         let mouse = { x: -100, y: -100 };
         const colors = [
-            '#FEE7F2', // Pastel Pink
-            '#E6E6FA', // Lavender
-            '#D4AF37', // Soft Gold
-            '#9993C3' // Dark Lavender
+            '#FEE7F2',
+            '#E6E6FA',
+            '#D4AF37',
+            '#9993C3'
         ];
 
-        // Particle Class
         class Particle {
             constructor(x, y, radius, color) {
                 this.x = x;
@@ -773,37 +853,29 @@
             }
 
             update() {
-                // Bounce off walls
                 if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
                     this.velocity.x = -this.velocity.x;
                 }
                 if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
                     this.velocity.y = -this.velocity.y;
                 }
-
-                // Interaction with mouse
                 const dx = mouse.x - this.x;
                 const dy = mouse.y - this.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
                 const repelDistance = 100;
                 const repelForce = 0.5;
-
                 if (distance < repelDistance) {
                     const angle = Math.atan2(dy, dx);
                     const force = repelForce * (repelDistance - distance) / repelDistance;
                     this.velocity.x -= force * Math.cos(angle);
                     this.velocity.y -= force * Math.sin(angle);
                 }
-
-                // Update position
                 this.x += this.velocity.x;
                 this.y += this.velocity.y;
-
                 this.draw();
             }
         }
 
-        // Initialize particles
         function init() {
             particles.length = 0;
             const particleCount = Math.min(Math.floor((canvas.width * canvas.height) / 10000), 100);
@@ -816,7 +888,6 @@
             }
         }
 
-        // Animation loop
         function animate() {
             requestAnimationFrame(animate);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -825,14 +896,12 @@
             });
         }
 
-        // Handle window resize
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             init();
         }
 
-        // Handle mouse movement
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.x;
             mouse.y = e.y;
@@ -851,12 +920,11 @@
             mobileMenuContainer.classList.remove('open');
         });
 
-        // Close mobile menu when a link is clicked
         function closeMobileMenu() {
             mobileMenuContainer.classList.remove('open');
         }
 
-        // --- Gallery Modal Logic (NEW) ---
+        // Gallery Modal Logic
         const galleryModal = document.getElementById('fullscreen-gallery-modal');
         const modalImage = document.getElementById('modal-image');
         const modalPrevBtn = document.getElementById('modal-prev-btn');
@@ -864,8 +932,6 @@
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const galleryItems = document.querySelectorAll('#gallery-grid .gallery-item img');
 
-        // This array will hold the images for the full-screen gallery.
-        // The images are now referenced from the root directory.
         const fullscreenImages = [
             'G1.jpg',
             'G2.jpg',
@@ -876,7 +942,6 @@
         ];
         let currentImageIndex = 0;
 
-        // Open the modal with the clicked image
         galleryItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 const index = parseInt(e.target.dataset.index);
@@ -890,42 +955,35 @@
             });
         });
 
-        // Update the image in the modal
         function updateModalImage() {
             modalImage.src = fullscreenImages[currentImageIndex];
         }
 
-        // Navigate to the previous image
         modalPrevBtn.addEventListener('click', () => {
             currentImageIndex = (currentImageIndex - 1 + fullscreenImages.length) % fullscreenImages.length;
             updateModalImage();
         });
 
-        // Navigate to the next image
         modalNextBtn.addEventListener('click', () => {
             currentImageIndex = (currentImageIndex + 1) % fullscreenImages.length;
             updateModalImage();
         });
 
-        // Close the modal
         modalCloseBtn.addEventListener('click', () => {
             galleryModal.classList.remove('show');
         });
 
-        // Close the modal by clicking outside the image
         galleryModal.addEventListener('click', (e) => {
             if (e.target.id === 'fullscreen-gallery-modal') {
                 galleryModal.classList.remove('show');
             }
         });
 
-        // Initialize on window load
         window.onload = function() {
             resizeCanvas();
             animate();
         };
 
-        // Re-initialize particles and resize canvas on window resize
         window.addEventListener('resize', resizeCanvas);
     </script>
 </body>

@@ -15,7 +15,7 @@
             --soft-gold: #D4AF37;
             --dark-lavender: #9993C3;
             --text-color: #4B4B4B;
-            --patriotic-blue: #7CB9E8;
+            --black-friday-dark: #111827; /* Nuevo color oscuro para Black Friday */
             --patriotic-white: #FFFFFF;
         }
         body {
@@ -221,7 +221,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
-            display: flex;
+            display: flex; /* Display is flex by default to cover the screen */
             align-items: center;
             justify-content: center;
             z-index: 100;
@@ -277,15 +277,32 @@
             margin-bottom: 1.5rem;
             display: none;
         }
-        .patriotic-section {
-            background-color: var(--patriotic-blue);
+        /* Estilos modificados para Black Friday */
+        .blackfriday-section {
+            background-color: var(--black-friday-dark);
             color: white;
+            background-image: radial-gradient(circle at center, #2a2a2a 0%, #111827 100%);
         }
-        .patriot-card {
+        .blackfriday-card {
             background-color: var(--patriotic-white);
             color: var(--text-color);
             border: 2px solid var(--soft-gold);
+            position: relative;
+            overflow: hidden;
         }
+        /* Etiqueta de oferta */
+        .offer-tag {
+            background-color: #000;
+            color: var(--soft-gold);
+            padding: 0.5rem 1rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-weight: bold;
+            border-bottom-left-radius: 1rem;
+            font-size: 1.125rem;
+        }
+
         #fullscreen-gallery-modal {
             position: fixed;
             top: 0;
@@ -402,7 +419,7 @@
     </style>
 </head>
 <body>
-    <!-- Welcome Modal -->
+    <!-- Welcome Modal: Cubre la pantalla inicialmente para pedir el nombre del usuario. -->
     <div id="welcome-modal">
         <div class="welcome-box">
             <div class="interactive-icons">
@@ -482,7 +499,8 @@
                     <a href="#about" class="nav-link text-lg text-gray-800">Sobre Nosotros</a>
                     <a href="#services" class="nav-link text-lg text-gray-800">Servicios</a>
                     <a href="#gallery" class="nav-link text-lg text-gray-800">Galería</a>
-                    <a href="#promocion-patria" class="nav-link text-lg text-gray-800">Promoción</a>
+                    <!-- Updated Link -->
+                    <a href="#promocion-blackfriday" class="nav-link text-lg text-gray-800">Black Friday</a>
                     <a href="#testimonials" class="nav-link text-lg text-gray-800">Testimonios</a>
                     <a href="#contact" class="nav-link text-lg text-gray-800">Contacto</a>
                 </div>
@@ -503,7 +521,8 @@
             <a href="#about" class="mobile-menu-link" onclick="closeMobileMenu()">Sobre Nosotros</a>
             <a href="#services" class="mobile-menu-link" onclick="closeMobileMenu()">Servicios</a>
             <a href="#gallery" class="mobile-menu-link" onclick="closeMobileMenu()">Galería</a>
-            <a href="#promocion-patria" class="mobile-menu-link" onclick="closeMobileMenu()">Promoción</a>
+            <!-- Updated Link -->
+            <a href="#promocion-blackfriday" class="mobile-menu-link" onclick="closeMobileMenu()">Black Friday</a>
             <a href="#testimonials" class="mobile-menu-link" onclick="closeMobileMenu()">Testimonios</a>
             <a href="#contact" class="mobile-menu-link" onclick="closeMobileMenu()">Contacto</a>
         </div>
@@ -559,7 +578,7 @@
                         <i class="fas fa-cut text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Cortes de Cabello</h3>
-                    <p class="text-gray-700 mb-4">Cortes de tendencia, clásicos y personalizados para hombres y mujeres.</p>
+                    <p class="text-gray-700 mb-4">Cortes de tendencia, clásicos y personalizados para hombres.</p>
                     <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q25.00</p>
                     <button class="btn mt-4 inline-block" data-service="Corte de Cabello">Reservar Ahora</button>
                 </div>
@@ -570,7 +589,7 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Coloración y Mechas</h3>
                     <p class="text-gray-700 mb-4">Balayage, mechas, tintes y retoques para iluminar tu estilo.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q150.00</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q350.00</p>
                     <button class="btn mt-4 inline-block" data-service="Coloración y Mechas">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 3: Tratamientos Capilares -->
@@ -578,7 +597,7 @@
                     <div class="flex items-center justify-center mb-4">
                         <i class="fas fa-magic text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2">Tratamientos Capilares</h3>
+                    <h3 class="text-2xl font-bold mb-2">Tratamientos y Planchado</h3>
                     <p class="text-gray-700 mb-4">Hidratación profunda, queratina y tratamientos para la salud de tu cabello.</p>
                     <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q75.00</p>
                     <button class="btn mt-4 inline-block" data-service="Tratamientos Capilares">Reservar Ahora</button>
@@ -590,7 +609,7 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Maquillaje</h3>
                     <p class="text-gray-700 mb-4">Maquillaje profesional para eventos y ocasiones especiales.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q100.00</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q250.00</p>
                     <button class="btn mt-4 inline-block" data-service="Maquillaje">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 5: Diseño de Uñas -->
@@ -598,9 +617,9 @@
                     <div class="flex items-center justify-center mb-4">
                         <i class="fas fa-hand-sparkles text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2">Diseño de Uñas</h3>
+                    <h3 class="text-2xl font-bold mb-2">Uñas Acrílico o Soft Gel</h3>
                     <p class="text-gray-700 mb-4">Estilos creativos, manicura semipermanente y diseños personalizados.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q100.00</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q125.00</p>
                     <button class="btn mt-4 inline-block" data-service="Diseño de Uñas">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 6: Extensión de Pestañas -->
@@ -608,9 +627,9 @@
                     <div class="flex items-center justify-center mb-4">
                         <i class="fas fa-eye text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2">Extensión de Pestañas</h3>
+                    <h3 class="text-2xl font-bold mb-2">Extensión de Pestañas Pelo a Pelo</h3>
                     <p class="text-gray-700 mb-4">Añade longitud y volumen a tus pestañas para una mirada más dramática y expresiva.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q150.00</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q250.00</p>
                     <button class="btn mt-4 inline-block" data-service="Extensión de Pestañas">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 7: Diseño y Perfilado de Cejas -->
@@ -618,9 +637,9 @@
                     <div class="flex items-center justify-center mb-4">
                         <i class="fas fa-seedling text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2">Diseño y Perfilado de Cejas</h3>
+                    <h3 class="text-2xl font-bold mb-2">Diseño de Cejas con Henna y Depilación con Cera</h3>
                     <p class="text-gray-700 mb-4">Un diseño personalizado para enmarcar tu mirada y realzar tu belleza natural.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q100.00</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q95.00</p>
                     <button class="btn mt-4 inline-block" data-service="Diseño y Perfilado de Cejas">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 8: Alisado Permanente -->
@@ -628,9 +647,9 @@
                     <div class="flex items-center justify-center mb-4">
                         <i class="fas fa-spa text-5xl" style="color: var(--dark-lavender);"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2">Alisado Permanente</h3>
+                    <h3 class="text-2xl font-bold mb-2">Alisado Nanoplastia</h3>
                     <p class="text-gray-700 mb-4">Un alisado duradero que deja tu cabello suave, brillante y sin frizz.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q250.00</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q200.00</p>
                     <button class="btn mt-4 inline-block" data-service="Alisado Permanente">Reservar Ahora</button>
                 </div>
                 <!-- At-Home Service Card -->
@@ -692,24 +711,51 @@
         </div>
     </section>
 
-    <!-- Promotion Section - Patriotic Month -->
-    <section id="promocion-patria" class="py-16 md:py-24 patriotic-section">
+    <!-- Promotion Section - Black Friday (UPDATED) -->
+    <section id="promocion-blackfriday" class="py-16 md:py-24 blackfriday-section">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-white">¡Promoción Combo del Mes Patrio! 🇬🇹</h2>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-12 text-white">
-                Disfruta de la siguiente promoción especial de septiembre, válida hasta el 30 de septiembre.
+            <!-- Icono y Título temático -->
+            <div class="mb-4 text-yellow-400 text-5xl">
+                <i class="fas fa-tags"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-white" style="font-family: 'Playfair Display', serif;">
+                ¡Black Friday en Modiseño! ✨
+            </h2>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-12 text-gray-200">
+                Luce un cambio de look espectacular sin sacrificar tu bolsillo. <br>
+                Descubre nuestra oferta más exclusiva del año, enfocada en color y estilo.
             </p>
-            <!-- Promotion Card -->
-            <div class="patriot-card card p-8 mx-auto max-w-lg">
-                <h3 class="text-3xl font-bold mb-4" style="color: var(--dark-lavender);">¡Combo Patrio! Coloración + Diseño de Uñas</h3>
-                <p class="text-xl mb-4 text-gray-700">
-                    Aprovecha este combo exclusivo que incluye una coloración profesional completa y un diseño de uñas creativo.
-                </p>
-                <p class="text-2xl font-bold mb-4" style="color: var(--soft-gold);">Precio desde Q250.00</p>
+            
+            <!-- Promotion Card - UPDATED CONTENT -->
+            <div class="blackfriday-card card p-8 mx-auto max-w-lg">
+                <div class="offer-tag">¡Desde Q150.00!</div>
+                <h3 class="text-3xl font-bold mb-4" style="color: var(--black-friday-dark);">Pack "Estilo y Color"</h3>
+                <ul class="text-left text-lg space-y-2 mb-6 text-gray-700">
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                        <span><strong>Tinte</strong> (Retoque de raíz o color completo, según largo).</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                        <span><strong>Tratamiento Sellador</strong> para brillo y protección del color.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
+                        <span><strong>Ondas o Planchado</strong>: Estilizado final profesional (No incluye solo secado).</span>
+                    </li>
+                </ul>
+                <div class="my-6">
+                   <p class="text-gray-500 line-through text-lg">Precio Regular: Q250.00 - Q400.00</p>
+                   <p class="text-4xl font-bold" style="color: var(--soft-gold);">Oferta: Q150.00*</p>
+                </div>
+                
                 <p class="text-sm font-semibold mb-6 text-gray-500">
-                    *Válido del 1 al 30 de septiembre.
+                    *El precio base de Q150.00 aplica para cabello corto/medio y retoque de raíz. El precio final varía según el largo y cantidad de producto. Válido del 24 al 30 de noviembre.
                 </p>
-                <button class="btn text-lg inline-block" data-service="Combo Patrio">¡Aprovecha Ahora!</button>
+                <!-- Button data-service updated for JS compatibility -->
+                <button class="btn text-lg inline-block w-full shadow-lg" data-service="Pack Estilo y Color Black Friday" style="background-color: var(--black-friday-dark); border: 2px solid var(--soft-gold);">
+                    ¡Reservar Oferta!
+                </button>
             </div>
         </div>
     </section>
@@ -829,19 +875,24 @@
                 enterBtn.addEventListener('click', () => {
                     handleEnterClick();
                     if (userName) {
-                        openBookingModal(serviceName);
+                        // Re-call openBookingModal only if the name was entered successfully
+                        openBookingModal(serviceName); 
                     }
                 });
                 return;
             }
             currentService = serviceName;
             bookingServiceName.textContent = `Servicio: ${capitalizeFirstLetter(currentService)}`;
+            // Reset fields
+            bookingDateInput.value = '';
+            bookingTimeInput.value = '';
+            document.querySelector('input[name="service-location"][value="en el salón"]').checked = true;
             bookingModal.style.display = 'flex';
         }
 
         // Open WhatsApp with a general message
         function openGeneralWhatsapp() {
-            const message = "Hola, me gustaría más información sobre sus servicios.";
+            const message = "Hola, mi nombre es " + (userName || "Visitante") + ". Me gustaría más información sobre sus servicios.";
             const encodedMessage = encodeURIComponent(message);
             window.open(`https://wa.me/50242585739?text=${encodedMessage}`, '_blank');
         }
@@ -858,6 +909,8 @@
                 errorMessage.style.display = 'block';
             }
         }
+        // Ensure only one listener is attached initially
+        enterBtn.removeEventListener('click', handleEnterClick);
         enterBtn.addEventListener('click', handleEnterClick);
 
         // Add event listeners to all service buttons
@@ -873,7 +926,9 @@
             const date = bookingDateInput.value;
             const time = bookingTimeInput.value;
             
-            let message = `Hola, mi nombre es ${userName}. Me gustaría agendar una cita para el servicio de *${currentService}*. `;
+            const clientName = userName || "Interesado/a";
+
+            let message = `Hola, mi nombre es ${clientName}. Me gustaría agendar una cita para el servicio de *${currentService}*. `;
             
             if (date && time) {
                 message += `La fecha que me gustaría es el día *${date}* a las *${time}*. `;
@@ -957,7 +1012,8 @@
 
         function init() {
             particles.length = 0;
-            const particleCount = Math.min(Math.floor((canvas.width * canvas.height) / 10000), 100);
+            // Limit particle count based on screen size, max 100
+            const particleCount = Math.min(Math.floor((canvas.width * canvas.height) / 10000), 100); 
             for (let i = 0; i < particleCount; i++) {
                 const radius = Math.random() * 5 + 2;
                 const x = Math.random() * (canvas.width - radius * 2) + radius;
@@ -1011,6 +1067,7 @@
         const modalCloseBtn = document.getElementById('modal-close-btn');
         const galleryItems = document.querySelectorAll('#gallery-grid .gallery-item img');
 
+        // Placeholder image URLs array (assuming images G1.jpg, G2.jpg, etc., are in the root)
         const fullscreenImages = [
             'G1.jpg',
             'G2.jpg',
@@ -1058,7 +1115,9 @@
             }
         });
 
+        // Initialize Canvas and Animation on load
         window.onload = function() {
+            console.log("Página cargada. Si ves una pantalla gris/rosa con un mensaje, por favor, ingresa tu nombre.");
             resizeCanvas();
             animate();
         };

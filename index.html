@@ -290,17 +290,21 @@
             position: relative;
             overflow: hidden;
         }
-        /* Etiqueta de oferta */
-        .offer-tag {
-            background-color: #000;
-            color: var(--soft-gold);
-            padding: 0.5rem 1rem;
-            position: absolute;
-            top: 0;
-            right: 0;
-            font-weight: bold;
-            border-bottom-left-radius: 1rem;
-            font-size: 1.125rem;
+
+
+/* Etiqueta de oferta */
+.offer-tag {
+    background-color: #C08497; /* rosado Día de la Madre */
+    color: white;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+    border-bottom-left-radius: 1rem;
+    font-size: 1.125rem;
+
+
         }
 
         #fullscreen-gallery-modal {
@@ -405,6 +409,37 @@
 
         /* Degradado para indicar el fin de la primera sección */
         .fade-bottom-header::after {
+
+
+
+/* ====== ESTILO DÍA DE LA MADRE ====== */
+.motherday-section {
+    background-color: #FFF0F5;
+    background-image: radial-gradient(circle at center, #ffe4ec 0%, #fff0f5 100%);
+}
+
+.motherday-card {
+    background-color: white;
+    border: 2px solid #C08497;
+}
+
+.offer-tag {
+    background-color: #C08497;
+    color: white;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+    border-bottom-left-radius: 1rem;
+}
+
+
+
+
+
+
+
             content: '';
             position: absolute;
             bottom: 0;
@@ -500,7 +535,7 @@
                     <a href="#services" class="nav-link text-lg text-gray-800">Servicios</a>
                     <a href="#gallery" class="nav-link text-lg text-gray-800">Galería</a>
                     <!-- Updated Link -->
-                    <a href="#promocion-blackfriday" class="nav-link text-lg text-gray-800">Black Friday</a>
+                    <a href="#promocion" class="nav-link text-lg text-gray-800">Promociones</a>
                     <a href="#testimonials" class="nav-link text-lg text-gray-800">Testimonios</a>
                     <a href="#contact" class="nav-link text-lg text-gray-800">Contacto</a>
                 </div>
@@ -522,7 +557,7 @@
             <a href="#services" class="mobile-menu-link" onclick="closeMobileMenu()">Servicios</a>
             <a href="#gallery" class="mobile-menu-link" onclick="closeMobileMenu()">Galería</a>
             <!-- Updated Link -->
-            <a href="#promocion-blackfriday" class="mobile-menu-link" onclick="closeMobileMenu()">Black Friday</a>
+            <a href="#promocion" class="mobile-menu-link" onclick="closeMobileMenu()">Promociones</a>
             <a href="#testimonials" class="mobile-menu-link" onclick="closeMobileMenu()">Testimonios</a>
             <a href="#contact" class="mobile-menu-link" onclick="closeMobileMenu()">Contacto</a>
         </div>
@@ -619,7 +654,7 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-2">Uñas Acrílico o Soft Gel</h3>
                     <p class="text-gray-700 mb-4">Estilos creativos, manicura semipermanente y diseños personalizados.</p>
-                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q125.00</p>
+                    <p class="text-2xl font-bold" style="color: var(--soft-gold);">Desde Q150.00</p>
                     <button class="btn mt-4 inline-block" data-service="Diseño de Uñas">Reservar Ahora</button>
                 </div>
                 <!-- Service Card 6: Extensión de Pestañas -->
@@ -711,54 +746,77 @@
         </div>
     </section>
 
-    <!-- Promotion Section - Black Friday (UPDATED) -->
-    <section id="promocion-blackfriday" class="py-16 md:py-24 blackfriday-section">
-        <div class="container mx-auto px-6 text-center">
-            <!-- Icono y Título temático -->
-            <div class="mb-4 text-yellow-400 text-5xl">
-                <i class="fas fa-tags"></i>
-            </div>
-            <h2 class="text-4xl md:text-5xl font-bold mb-12 text-white" style="font-family: 'Playfair Display', serif;">
-                ¡Black Friday en Modiseño! ✨
-            </h2>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-12 text-gray-200">
-                Luce un cambio de look espectacular sin sacrificar tu bolsillo. <br>
-                Descubre nuestra oferta más exclusiva del año, enfocada en color y estilo.
-            </p>
-            
-            <!-- Promotion Card - UPDATED CONTENT -->
-            <div class="blackfriday-card card p-8 mx-auto max-w-lg">
-                <div class="offer-tag">¡Desde Q150.00!</div>
-                <h3 class="text-3xl font-bold mb-4" style="color: var(--black-friday-dark);">Pack "Estilo y Color"</h3>
-                <ul class="text-left text-lg space-y-2 mb-6 text-gray-700">
-                    <li class="flex items-start">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
-                        <span><strong>Tinte</strong> (Retoque de raíz o color completo, según largo).</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
-                        <span><strong>Tratamiento Sellador</strong> para brillo y protección del color.</span>
-                    </li>
-                    <li class="flex items-start">
-                        <i class="fas fa-check-circle text-green-500 mt-1 mr-2 flex-shrink-0"></i>
-                        <span><strong>Ondas o Planchado</strong>: Estilizado final profesional.</span>
-                    </li>
-                </ul>
-                <div class="my-6">
-                   <p class="text-gray-500 line-through text-lg">Precio Regular: Q250.00 - Q400.00</p>
-                   <p class="text-4xl font-bold" style="color: var(--soft-gold);">Oferta: Q150.00*</p>
-                </div>
-                
-                <p class="text-sm font-semibold mb-6 text-gray-500">
-                    *El precio base de Q150.00 aplica para cabello corto/medio y retoque de raíz. El precio final varía según el largo y cantidad de producto. Válido del 24 al 30 de noviembre.
-                </p>
-                <!-- Button data-service updated for JS compatibility -->
-                <button class="btn text-lg inline-block w-full shadow-lg" data-service="Pack Estilo y Color Black Friday" style="background-color: var(--black-friday-dark); border: 2px solid var(--soft-gold);">
-                    ¡Reservar Oferta!
-                </button>
-            </div>
+
+<!-- ================= PROMOCIÓN DÍA DE LA MADRE ================= -->
+
+<section id="promocion-madre" class="py-16 md:py-24 motherday-section">
+    <div class="container mx-auto px-6 text-center">
+        
+        <!-- Icono y Título -->
+        <div class="mb-4 text-pink-400 text-5xl">
+            <i class="fas fa-heart"></i>
         </div>
-    </section>
+
+        <h2 class="text-4xl md:text-5xl font-bold mb-12 text-pink-600" style="font-family: 'Playfair Display', serif;">
+            🌸 Especial Día de la Madre 🌸
+        </h2>
+
+        <p class="text-lg md:text-xl max-w-3xl mx-auto mb-12 text-gray-600">
+            Porque mamá merece lo mejor 💖<br>
+            Regálale un momento de belleza, relajación y amor.
+        </p>
+        
+        <!-- Tarjeta -->
+        <div class="motherday-card card p-8 mx-auto max-w-lg">
+            
+            <div class="offer-tag">¡Desde Q180.00!</div>
+
+            <h3 class="text-3xl font-bold mb-4 text-pink-600">
+                Pack "Mamá Radiante"
+            </h3>
+
+            <ul class="text-left text-lg space-y-2 mb-6 text-gray-700">
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                    <span><strong>Tinte o retoque</strong> para renovar su look.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                    <span><strong>Tratamiento capilar</strong> para brillo y suavidad.</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                    <span><strong>Peinado profesional</strong> (ondas o planchado).</span>
+                </li>
+            </ul>
+
+            <div class="my-6">
+               <p class="text-gray-400 line-through text-lg">
+                   Precio Regular: Q250.00 - Q400.00
+               </p>
+               <p class="text-4xl font-bold text-pink-600">
+                   Oferta: Q180.00*
+               </p>
+            </div>
+            
+            <p class="text-sm font-semibold mb-6 text-gray-500">
+                *Aplica para cabello corto/medio. Precio varía según largo. 
+                Promoción válida por tiempo limitado.
+            </p>
+
+            <button class="btn text-lg inline-block w-full shadow-lg"
+                    data-service="Pack Mamá Radiante"
+                    style="background-color: #C08497; border: 2px solid #D4AF37;">
+                🎁 ¡Reservar Regalo!
+            </button>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= FIN PROMOCIÓN ================= -->
+
+
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="py-16 md:py-24">
